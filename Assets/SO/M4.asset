@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64275ab31854b2040ac6919c60cef9ba, type: 3}
-  m_Name: 1911
+  m_Name: M4
   m_EditorClassIdentifier: 
-  wpnName: 1911
-  type: 1
-  rarity: 0
-  maxAmmo: 10
-  bulletsPerShot: 1
-  wpnImage: {fileID: 576788955910145305, guid: 2262f408278271248889a3ea3c7e75bf, type: 3}
-  fireRate: 1
-  bulletSpeed: 50
-  dmg: 1
+  wpnName: M4
+  type: 3
+  rarity: 1
+  maxAmmo: 25
+  bulletsPerShot: 2
+  wpnImage: {fileID: 8258934663192438097, guid: 006f7f82ca50d224a993a4ca8304ad81, type: 3}
+  fireRate: 2
+  bulletSpeed: 90
+  dmg: 4

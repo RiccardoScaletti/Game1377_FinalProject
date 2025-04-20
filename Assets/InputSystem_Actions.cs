@@ -578,6 +578,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeWpn"",
+                    ""type"": ""Button"",
+                    ""id"": ""1abf3108-1117-426a-b434-bc739023db8d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -745,6 +754,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4c47a46-08b2-46db-a7d8-bc5894f36988"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""ChangeWpn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -830,6 +850,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_TowerDefense_Fire = m_TowerDefense.FindAction("Fire", throwIfNotFound: true);
         m_TowerDefense_Interact = m_TowerDefense.FindAction("Interact", throwIfNotFound: true);
         m_TowerDefense_Sprint = m_TowerDefense.FindAction("Sprint", throwIfNotFound: true);
+        m_TowerDefense_ChangeWpn = m_TowerDefense.FindAction("ChangeWpn", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1019,6 +1040,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_TowerDefense_Fire;
     private readonly InputAction m_TowerDefense_Interact;
     private readonly InputAction m_TowerDefense_Sprint;
+    private readonly InputAction m_TowerDefense_ChangeWpn;
     public struct TowerDefenseActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -1027,6 +1049,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_TowerDefense_Fire;
         public InputAction @Interact => m_Wrapper.m_TowerDefense_Interact;
         public InputAction @Sprint => m_Wrapper.m_TowerDefense_Sprint;
+        public InputAction @ChangeWpn => m_Wrapper.m_TowerDefense_ChangeWpn;
         public InputActionMap Get() { return m_Wrapper.m_TowerDefense; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1048,6 +1071,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @ChangeWpn.started += instance.OnChangeWpn;
+            @ChangeWpn.performed += instance.OnChangeWpn;
+            @ChangeWpn.canceled += instance.OnChangeWpn;
         }
 
         private void UnregisterCallbacks(ITowerDefenseActions instance)
@@ -1064,6 +1090,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @ChangeWpn.started -= instance.OnChangeWpn;
+            @ChangeWpn.performed -= instance.OnChangeWpn;
+            @ChangeWpn.canceled -= instance.OnChangeWpn;
         }
 
         public void RemoveCallbacks(ITowerDefenseActions instance)
@@ -1145,5 +1174,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnChangeWpn(InputAction.CallbackContext context);
     }
 }

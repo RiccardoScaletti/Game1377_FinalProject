@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public WeaponData currentWeapon;
 
     public int currentAmmo;
-
+    private int i = 0; //debug index
     public static Player instance { get; private set; }
 
     private void Awake()
@@ -22,12 +22,17 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        health = 10;
         EquipWeapon("1911");
     }
 
     void Update()
     {
-        
+        if (PlayerControls.wpnChanged && i==0)
+        {
+            EquipWeapon("M4");
+            i++;
+        }
     }
 
     void EquipWeapon(string weaponName)

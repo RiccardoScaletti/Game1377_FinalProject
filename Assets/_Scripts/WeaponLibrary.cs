@@ -16,6 +16,7 @@ public class WeaponLibrary : ScriptableObject
         foreach (var weapon in weapons)
         {
             if (!weaponDict.ContainsKey(weapon.wpnName))
+                weapon.InitializeWeaponStats();
                 weaponDict.Add(weapon.wpnName, weapon);
         }
     }

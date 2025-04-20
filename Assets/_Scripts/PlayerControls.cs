@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,8 @@ public class PlayerControls : MonoBehaviour
     private CharacterController controller;
     private InputSystem_Actions controls;
 
+    public static bool wpnChanged = false;
+
     Animator animator;
 
     void Awake()
@@ -28,6 +31,13 @@ public class PlayerControls : MonoBehaviour
         controls.TowerDefense.Sprint.canceled += OnSprint;
 
         controls.TowerDefense.Fire.performed += OnFire;
+
+        controls.TowerDefense.ChangeWpn.performed += OnChangeWpn;
+    }
+
+    private void OnChangeWpn(InputAction.CallbackContext context)
+    {
+        wpnChanged = true;
     }
 
     private void Start()
@@ -73,20 +83,41 @@ public class PlayerControls : MonoBehaviour
         float fireRate = Player.instance.currentWeapon.fireRate;
         int bulletsPerShot = Player.instance.currentWeapon.bulletsPerShot;
        
-        if (Player.instance.currentAmmo <= 0 || fireCooldown > 0) return;
+        if (fireCooldown > 0) return;
         else
         {
-            Vector3 UpdatedPos = new Vector3(transform.position.x, 2, transform.position.z);
-            for (int i = 0; i < bulletsPerShot; i++) 
-            {
-                Debug.Log("Shot");
-                Instantiate(bulletPrefab, UpdatedPos, transform.rotation);
-                Player.instance.currentAmmo--;
-            }
+            StartCoroutine(FireBurst(bulletsPerShot));
+
+            //Vector3 UpdatedPos = new Vector3(transform.position.x, 2, transform.position.z);
+            //for (int i = 0; i < bulletsPerShot; i++) 
+            //{
+            //    Debug.Log("Shot");
+            //    Instantiate(bulletPrefab, UpdatedPos, transform.rotation);
+            //    Player.instance.currentAmmo--;
+            //}
             fireCooldown = 1f / fireRate;
         }
     }
-   
+
+    private IEnumerator FireBurst(int bulletsPerShot)
+    {
+        float burstDelay = 0.1f; // time between each shot in the burst
+
+        for (int i = 0; i < bulletsPerShot; i++)
+        {
+            if (Player.instance.currentAmmo <= 0) yield break;
+
+            Vector3 UpdatedPos = new Vector3(transform.position.x, 2, transform.position.z);
+
+            Instantiate(bulletPrefab, UpdatedPos, transform.rotation);
+            Player.instance.currentAmmo--;
+
+            Debug.Log("Shot " + (i + 1));
+
+            yield return new WaitForSeconds(burstDelay);
+        }
+    }
+
     private void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
