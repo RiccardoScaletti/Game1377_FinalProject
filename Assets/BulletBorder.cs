@@ -6,7 +6,6 @@ public class BulletBorder : MonoBehaviour
     {
         if (other.gameObject.tag == "Bullet")
         {
-            Debug.Log("Bullet");
             Destroy(other.gameObject);
         }
     }
