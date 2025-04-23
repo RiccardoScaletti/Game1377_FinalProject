@@ -28,6 +28,8 @@ public class WeaponData : ScriptableObject
     public int maxAmmo;
     public int bulletsPerShot;
     public Sprite wpnImage;
+    public AudioClip wpnSoundShot;
+    public AudioClip wpnSoundReload;
 
     //This depend on the rarity of the gun
     [HideInInspector] public float fireRate;

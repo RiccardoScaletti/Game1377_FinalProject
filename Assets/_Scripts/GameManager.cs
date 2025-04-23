@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
-    private int level = 0;
-    private int playerLife = 3;
-
     //store gameobjects for the player and rival to target scripts that plays animations
     [SerializeField] private GameObject playerCharacter;
+    
+    public int hordeNumber = 1;
+
+    public event Action OnHordeStarts;
+
 
     private void Awake()
     {
@@ -26,15 +28,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        StartHorde();
     }
 
+   
     private void Update()
     {
-        if (playerLife <= 0)
+        if (Player.instance.health <= 0)
         {
             EndGame();
         }
+    }
+
+    private void StartHorde()
+    {
+        OnHordeStarts?.Invoke();
     }
 
     private void EndGame()

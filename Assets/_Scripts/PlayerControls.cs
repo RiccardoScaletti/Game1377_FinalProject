@@ -18,6 +18,10 @@ public class PlayerControls : MonoBehaviour
 
     public static bool wpnChanged = false;
 
+    public AudioSource emptyClip;
+
+    public Transform bulletSpawn;
+
     Animator animator;
 
     void Awake()
@@ -33,12 +37,11 @@ public class PlayerControls : MonoBehaviour
         controls.TowerDefense.Fire.performed += OnFire;
 
         controls.TowerDefense.ChangeWpn.performed += OnChangeWpn;
+
+        controls.TowerDefense.Reload.performed += OnReload;
     }
 
-    private void OnChangeWpn(InputAction.CallbackContext context)
-    {
-        wpnChanged = true;
-    }
+   
 
     private void Start()
     {
@@ -57,9 +60,10 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         fireCooldown -= Time.deltaTime;
+
+        //movement mngment
         isMoving = moveInput.sqrMagnitude > 0.01f;
         CameraPositionUpdate();
-
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
         animator.SetBool("IsWalking", isMoving);
         
@@ -79,24 +83,21 @@ public class PlayerControls : MonoBehaviour
 
     private void OnFire(InputAction.CallbackContext context)
     {
-        Debug.Log("Fire");
         float fireRate = Player.instance.currentWeapon.fireRate;
         int bulletsPerShot = Player.instance.currentWeapon.bulletsPerShot;
-       
+
         if (fireCooldown > 0) return;
+        else if (Player.instance.currentAmmo == 0)
+        {
+            emptyClip.Play();
+        }
         else
         {
             StartCoroutine(FireBurst(bulletsPerShot));
-
-            //Vector3 UpdatedPos = new Vector3(transform.position.x, 2, transform.position.z);
-            //for (int i = 0; i < bulletsPerShot; i++) 
-            //{
-            //    Debug.Log("Shot");
-            //    Instantiate(bulletPrefab, UpdatedPos, transform.rotation);
-            //    Player.instance.currentAmmo--;
-            //}
+            Player.instance.audioSources[0].Play();
             fireCooldown = 1f / fireRate;
         }
+    
     }
 
     private IEnumerator FireBurst(int bulletsPerShot)
@@ -105,15 +106,11 @@ public class PlayerControls : MonoBehaviour
 
         for (int i = 0; i < bulletsPerShot; i++)
         {
-            if (Player.instance.currentAmmo <= 0) yield break;
 
-            Vector3 UpdatedPos = new Vector3(transform.position.x, 2, transform.position.z);
+            //Vector3 UpdatedPos = new Vector3(transform.position.x, 2, transform.position.z);
 
-            Instantiate(bulletPrefab, UpdatedPos, transform.rotation);
+            Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
             Player.instance.currentAmmo--;
-
-            Debug.Log("Shot " + (i + 1));
-
             yield return new WaitForSeconds(burstDelay);
         }
     }
@@ -160,4 +157,26 @@ public class PlayerControls : MonoBehaviour
         mainCamera.transform.position = currentPlayerPos;
     }
 
+    private void OnChangeWpn(InputAction.CallbackContext context)
+    {
+        wpnChanged = true;
+    }
+
+    private void OnReload(InputAction.CallbackContext context)
+    {
+        if (!Player.instance.isReloading && Player.instance.currentAmmo != Player.instance.currentWeapon.maxAmmo)
+        {
+            Player.instance.isReloading = true;
+            Player.instance.audioSources[1].Play();
+            StartCoroutine(ReloadTime());
+        }
+    }
+
+    private IEnumerator ReloadTime()
+    {
+        float reloadDelay = 0.6f; 
+        yield return new WaitForSeconds(reloadDelay);
+        Player.instance.currentAmmo = Player.instance.currentWeapon.maxAmmo;
+        Player.instance.isReloading = false;
+    }
 }

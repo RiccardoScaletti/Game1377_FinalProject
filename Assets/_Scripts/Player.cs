@@ -1,14 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public int health;
+    public float health;
+    public int killCount = 0;
 
     public WeaponLibrary weaponLibrary;
     public WeaponData currentWeapon;
-
     public int currentAmmo;
-    private int i = 0; //debug index
+    [Header("Wpn sounds")]
+    public AudioSource[] audioSources; //0 is for shooting, 1 is for reload
+
+    public Image healthBar;
+
+    [HideInInspector] public bool isReloading = false;
     public static Player instance { get; private set; }
 
     private void Awake()
@@ -22,17 +28,20 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-        health = 10;
+        health = 1;
         EquipWeapon("1911");
     }
 
     void Update()
     {
-        if (PlayerControls.wpnChanged && i==0)
-        {
-            EquipWeapon("M4");
-            i++;
-        }
+        healthBar.fillAmount = health;
+       
+        
+        //if (PlayerControls.wpnChanged && i==0)
+        //{
+        //    EquipWeapon("M4");
+        //    i++;
+        //}
     }
 
     void EquipWeapon(string weaponName)
@@ -43,6 +52,8 @@ public class Player : MonoBehaviour
         {
             currentWeapon = weapon;
             Debug.Log("Equipped: " + weapon.wpnName);
+            audioSources[0].clip = currentWeapon.wpnSoundShot;
+            audioSources[1].clip = currentWeapon.wpnSoundReload;
         }
         else
         {
