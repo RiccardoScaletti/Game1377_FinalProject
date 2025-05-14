@@ -29,19 +29,13 @@ public class Player : MonoBehaviour
     void Start()
     {
         health = 1;
-        EquipWeapon("1911");
+        EquipWeapon("M4");
     }
 
     void Update()
     {
         healthBar.fillAmount = health;
        
-        
-        //if (PlayerControls.wpnChanged && i==0)
-        //{
-        //    EquipWeapon("M4");
-        //    i++;
-        //}
     }
 
     void EquipWeapon(string weaponName)

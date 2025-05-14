@@ -10,6 +10,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     private bool isSprinting = false;
     private float fireCooldown = 0;
+    float burstDelay = 0.1f; // time between each shot in the burst
     [SerializeField] private bool isMoving;
 
     private Vector3 moveInput;
@@ -86,7 +87,7 @@ public class PlayerControls : MonoBehaviour
         float fireRate = Player.instance.currentWeapon.fireRate;
         int bulletsPerShot = Player.instance.currentWeapon.bulletsPerShot;
 
-        if (fireCooldown > 0) return;
+        if (fireCooldown > 0 || Player.instance.currentAmmo <= 0) return;
         else if (Player.instance.currentAmmo == 0)
         {
             emptyClip.Play();
@@ -94,24 +95,21 @@ public class PlayerControls : MonoBehaviour
         else
         {
             StartCoroutine(FireBurst(bulletsPerShot));
-            Player.instance.audioSources[0].Play();
             fireCooldown = 1f / fireRate;
         }
-    
     }
 
     private IEnumerator FireBurst(int bulletsPerShot)
     {
-        float burstDelay = 0.1f; // time between each shot in the burst
-
         for (int i = 0; i < bulletsPerShot; i++)
         {
-
-            //Vector3 UpdatedPos = new Vector3(transform.position.x, 2, transform.position.z);
-
-            Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-            Player.instance.currentAmmo--;
-            yield return new WaitForSeconds(burstDelay);
+            if (Player.instance.currentAmmo > 0)
+            {
+                Player.instance.audioSources[0].Play();
+                Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+                Player.instance.currentAmmo--;
+                yield return new WaitForSeconds(burstDelay);
+            }
         }
     }
 
@@ -125,11 +123,13 @@ public class PlayerControls : MonoBehaviour
         if (context.performed)
         {
             isSprinting = true;
+            animator.SetBool("IsSprinting", true);
             moveSpeed *= 2;
         }
         else if (context.canceled)
         {
             isSprinting = false;
+            animator.SetBool("IsSprinting", false);
             moveSpeed /= 2;
         }
     }
@@ -174,8 +174,7 @@ public class PlayerControls : MonoBehaviour
 
     private IEnumerator ReloadTime()
     {
-        float reloadDelay = 0.6f; 
-        yield return new WaitForSeconds(reloadDelay);
+        yield return new WaitForSeconds(Player.instance.currentWeapon.reloadTime);
         Player.instance.currentAmmo = Player.instance.currentWeapon.maxAmmo;
         Player.instance.isReloading = false;
     }

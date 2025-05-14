@@ -27,6 +27,7 @@ public class WeaponData : ScriptableObject
     public Rarity rarity;
     public int maxAmmo;
     public int bulletsPerShot;
+    public float reloadTime;
     public Sprite wpnImage;
     public AudioClip wpnSoundShot;
     public AudioClip wpnSoundReload;
