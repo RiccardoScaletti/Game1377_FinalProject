@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour
     //store gameobjects for the player and rival to target scripts that plays animations
     [SerializeField] private GameObject playerCharacter;
     
-    public int hordeNumber = 1;
-
     public event Action OnHordeStarts;
 
+    public int zombiesSpawned = 0;
+   
 
     private void Awake()
     {
@@ -23,26 +23,31 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Warning, it is already present another instance of the Game Manager");
         }
         instance = this; // instance initialization, needed to define a singleton
-        //assigns the variable instance to itself
     }
 
     private void Start()
     {
         StartHorde();
+        ZombieBoss.instance.onBossDefeated += GameWon;
     }
 
-   
     private void Update()
     {
         if (Player.instance.health <= 0)
         {
             EndGame();
         }
+        
     }
 
     private void StartHorde()
     {
         OnHordeStarts?.Invoke();
+    }
+    private void GameWon()
+    {
+        Debug.Log("game won");
+        Application.Quit();
     }
 
     private void EndGame()

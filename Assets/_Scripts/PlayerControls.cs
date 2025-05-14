@@ -42,8 +42,6 @@ public class PlayerControls : MonoBehaviour
         controls.TowerDefense.Reload.performed += OnReload;
     }
 
-   
-
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -87,9 +85,10 @@ public class PlayerControls : MonoBehaviour
         float fireRate = Player.instance.currentWeapon.fireRate;
         int bulletsPerShot = Player.instance.currentWeapon.bulletsPerShot;
 
-        if (fireCooldown > 0 || Player.instance.currentAmmo <= 0) return;
+        if (fireCooldown > 0) return;
         else if (Player.instance.currentAmmo == 0)
         {
+            Debug.Log("Empty Gun!");
             emptyClip.Play();
         }
         else
@@ -170,6 +169,7 @@ public class PlayerControls : MonoBehaviour
             Player.instance.audioSources[1].Play();
             StartCoroutine(ReloadTime());
         }
+       
     }
 
     private IEnumerator ReloadTime()

@@ -1,20 +1,25 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public float health;
-    public int killCount = 0;
+    public Image healthBar;
 
     public WeaponLibrary weaponLibrary;
     public WeaponData currentWeapon;
     public int currentAmmo;
+
     [Header("Wpn sounds")]
     public AudioSource[] audioSources; //0 is for shooting, 1 is for reload
 
-    public Image healthBar;
-
     [HideInInspector] public bool isReloading = false;
+    [HideInInspector] public int killCount = 0;
+
+    public event Action OnBossBattle;
+    private bool bossCalled = false;
+
     public static Player instance { get; private set; }
 
     private void Awake()
@@ -29,13 +34,18 @@ public class Player : MonoBehaviour
     void Start()
     {
         health = 1;
-        EquipWeapon("M4");
+        EquipWeapon("1911");
     }
 
     void Update()
     {
         healthBar.fillAmount = health;
-       
+        if (killCount == 100 && !bossCalled)
+        {
+            Debug.Log("Boss spawned");
+            OnBossBattle?.Invoke();
+            bossCalled = true;
+        }
     }
 
     void EquipWeapon(string weaponName)
