@@ -540,7 +540,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""TowerDefense"",
+            ""name"": ""ZombieAttack"",
             ""id"": ""0c847bba-3b9c-4d6a-b443-ade855bdf877"",
             ""actions"": [
                 {
@@ -574,15 +574,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""35d95ffb-a442-4a44-b8e4-1cf7282c3971"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ChangeWpn"",
-                    ""type"": ""Button"",
-                    ""id"": ""1abf3108-1117-426a-b434-bc739023db8d"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -766,17 +757,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b4c47a46-08b2-46db-a7d8-bc5894f36988"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""ChangeWpn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""5e185fef-332c-4aa0-b221-3acef1d0f147"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
@@ -864,20 +844,19 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
-        // TowerDefense
-        m_TowerDefense = asset.FindActionMap("TowerDefense", throwIfNotFound: true);
-        m_TowerDefense_Move = m_TowerDefense.FindAction("Move", throwIfNotFound: true);
-        m_TowerDefense_Fire = m_TowerDefense.FindAction("Fire", throwIfNotFound: true);
-        m_TowerDefense_Interact = m_TowerDefense.FindAction("Interact", throwIfNotFound: true);
-        m_TowerDefense_Sprint = m_TowerDefense.FindAction("Sprint", throwIfNotFound: true);
-        m_TowerDefense_ChangeWpn = m_TowerDefense.FindAction("ChangeWpn", throwIfNotFound: true);
-        m_TowerDefense_Reload = m_TowerDefense.FindAction("Reload", throwIfNotFound: true);
+        // ZombieAttack
+        m_ZombieAttack = asset.FindActionMap("ZombieAttack", throwIfNotFound: true);
+        m_ZombieAttack_Move = m_ZombieAttack.FindAction("Move", throwIfNotFound: true);
+        m_ZombieAttack_Fire = m_ZombieAttack.FindAction("Fire", throwIfNotFound: true);
+        m_ZombieAttack_Interact = m_ZombieAttack.FindAction("Interact", throwIfNotFound: true);
+        m_ZombieAttack_Sprint = m_ZombieAttack.FindAction("Sprint", throwIfNotFound: true);
+        m_ZombieAttack_Reload = m_ZombieAttack.FindAction("Reload", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
     {
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_TowerDefense.enabled, "This will cause a leak and performance issues, InputSystem_Actions.TowerDefense.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_ZombieAttack.enabled, "This will cause a leak and performance issues, InputSystem_Actions.ZombieAttack.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1054,34 +1033,32 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     }
     public UIActions @UI => new UIActions(this);
 
-    // TowerDefense
-    private readonly InputActionMap m_TowerDefense;
-    private List<ITowerDefenseActions> m_TowerDefenseActionsCallbackInterfaces = new List<ITowerDefenseActions>();
-    private readonly InputAction m_TowerDefense_Move;
-    private readonly InputAction m_TowerDefense_Fire;
-    private readonly InputAction m_TowerDefense_Interact;
-    private readonly InputAction m_TowerDefense_Sprint;
-    private readonly InputAction m_TowerDefense_ChangeWpn;
-    private readonly InputAction m_TowerDefense_Reload;
-    public struct TowerDefenseActions
+    // ZombieAttack
+    private readonly InputActionMap m_ZombieAttack;
+    private List<IZombieAttackActions> m_ZombieAttackActionsCallbackInterfaces = new List<IZombieAttackActions>();
+    private readonly InputAction m_ZombieAttack_Move;
+    private readonly InputAction m_ZombieAttack_Fire;
+    private readonly InputAction m_ZombieAttack_Interact;
+    private readonly InputAction m_ZombieAttack_Sprint;
+    private readonly InputAction m_ZombieAttack_Reload;
+    public struct ZombieAttackActions
     {
         private @InputSystem_Actions m_Wrapper;
-        public TowerDefenseActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_TowerDefense_Move;
-        public InputAction @Fire => m_Wrapper.m_TowerDefense_Fire;
-        public InputAction @Interact => m_Wrapper.m_TowerDefense_Interact;
-        public InputAction @Sprint => m_Wrapper.m_TowerDefense_Sprint;
-        public InputAction @ChangeWpn => m_Wrapper.m_TowerDefense_ChangeWpn;
-        public InputAction @Reload => m_Wrapper.m_TowerDefense_Reload;
-        public InputActionMap Get() { return m_Wrapper.m_TowerDefense; }
+        public ZombieAttackActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_ZombieAttack_Move;
+        public InputAction @Fire => m_Wrapper.m_ZombieAttack_Fire;
+        public InputAction @Interact => m_Wrapper.m_ZombieAttack_Interact;
+        public InputAction @Sprint => m_Wrapper.m_ZombieAttack_Sprint;
+        public InputAction @Reload => m_Wrapper.m_ZombieAttack_Reload;
+        public InputActionMap Get() { return m_Wrapper.m_ZombieAttack; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(TowerDefenseActions set) { return set.Get(); }
-        public void AddCallbacks(ITowerDefenseActions instance)
+        public static implicit operator InputActionMap(ZombieAttackActions set) { return set.Get(); }
+        public void AddCallbacks(IZombieAttackActions instance)
         {
-            if (instance == null || m_Wrapper.m_TowerDefenseActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_TowerDefenseActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_ZombieAttackActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ZombieAttackActionsCallbackInterfaces.Add(instance);
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -1094,15 +1071,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
-            @ChangeWpn.started += instance.OnChangeWpn;
-            @ChangeWpn.performed += instance.OnChangeWpn;
-            @ChangeWpn.canceled += instance.OnChangeWpn;
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
         }
 
-        private void UnregisterCallbacks(ITowerDefenseActions instance)
+        private void UnregisterCallbacks(IZombieAttackActions instance)
         {
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
@@ -1116,29 +1090,26 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
-            @ChangeWpn.started -= instance.OnChangeWpn;
-            @ChangeWpn.performed -= instance.OnChangeWpn;
-            @ChangeWpn.canceled -= instance.OnChangeWpn;
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
         }
 
-        public void RemoveCallbacks(ITowerDefenseActions instance)
+        public void RemoveCallbacks(IZombieAttackActions instance)
         {
-            if (m_Wrapper.m_TowerDefenseActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_ZombieAttackActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(ITowerDefenseActions instance)
+        public void SetCallbacks(IZombieAttackActions instance)
         {
-            foreach (var item in m_Wrapper.m_TowerDefenseActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_ZombieAttackActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_TowerDefenseActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_ZombieAttackActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public TowerDefenseActions @TowerDefense => new TowerDefenseActions(this);
+    public ZombieAttackActions @ZombieAttack => new ZombieAttackActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1197,13 +1168,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
     }
-    public interface ITowerDefenseActions
+    public interface IZombieAttackActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
-        void OnChangeWpn(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
     }
 }

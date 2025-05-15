@@ -12,32 +12,18 @@ public class SpawnPoint : MonoBehaviour
     {
         GameManager.instance.OnHordeStarts += SpawnZombies;
     }
-
-    private void Update()
-    {
-
-    }
-
+  
     private void SpawnZombies()
     {
         StartCoroutine(SpawnZombiesOverTime(spawnRate));
     }
     private IEnumerator SpawnZombiesOverTime(float interval)
     {
-        if (GameManager.instance.zombiesSpawned >= 100)
+        for (int i = 0; i < 25; i++)
         {
-            Destroy(gameObject);
+            Instantiate(ZombiePrefabs[Random.Range(0, 3)], transform.position, transform.rotation);
+            GameManager.instance.zombiesSpawned++;
+            yield return new WaitForSeconds(interval);
         }
-        else
-        {
-            for (int i = 0; i < 25; i++)
-            {
-                Instantiate(ZombiePrefabs[Random.Range(0, 3)], transform.position, transform.rotation);
-                GameManager.instance.zombiesSpawned++;
-                yield return new WaitForSeconds(interval);
-            }
-        }
-           
     }
-
 }

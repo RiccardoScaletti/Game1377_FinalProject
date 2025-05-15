@@ -17,10 +17,8 @@ MonoBehaviour:
   rarity: 1
   maxAmmo: 25
   bulletsPerShot: 2
-  reloadTime: 2
   wpnImage: {fileID: -824200625, guid: 9af108faf7a309745bb32c8eec6a3b41, type: 3}
-  wpnSoundShot: {fileID: 8300000, guid: f9b648742dd8bbf46a2c92b49a82f8a0, type: 3}
-  wpnSoundReload: {fileID: 8300000, guid: 028905332852d2747be92c243a7b0acf, type: 3}
-  fireRate: 2
+  wpnSoundShot: {fileID: 8300000, guid: 408a2ea455224eb4d89db147d442662e, type: 3}
+  fireRate: 1.5
   bulletSpeed: 90
   dmg: 4

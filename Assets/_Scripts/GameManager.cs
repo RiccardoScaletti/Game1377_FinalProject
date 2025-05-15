@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
 
     //store gameobjects for the player and rival to target scripts that plays animations
     [SerializeField] private GameObject playerCharacter;
-    
+    [SerializeField] private GameObject bossObject;
+
     public event Action OnHordeStarts;
 
     public int zombiesSpawned = 0;
@@ -22,13 +23,17 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("Warning, it is already present another instance of the Game Manager");
         }
-        instance = this; // instance initialization, needed to define a singleton
+        instance = this; 
     }
 
     private void Start()
     {
-        StartHorde();
-        ZombieBoss.instance.onBossDefeated += GameWon;
+        StartHorde();//1
+        
+        Player.instance.OnBossBattle += BossBattleBegin;//2
+        
+        ZombieBoss zombieBossScript = bossObject.GetComponent<ZombieBoss>();//3
+        zombieBossScript.onBossDefeated += GameWon;
     }
 
     private void Update()
@@ -37,14 +42,19 @@ public class GameManager : MonoBehaviour
         {
             EndGame();
         }
-        
     }
-
-    private void StartHorde()
+   
+    private void StartHorde()//1
     {
         OnHordeStarts?.Invoke();
     }
-    private void GameWon()
+
+    private void BossBattleBegin()//2
+    {
+        bossObject.SetActive(true);
+    }
+
+    private void GameWon()//3
     {
         Debug.Log("game won");
         Application.Quit();

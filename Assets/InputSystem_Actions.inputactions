@@ -518,7 +518,7 @@
             ]
         },
         {
-            "name": "TowerDefense",
+            "name": "ZombieAttack",
             "id": "0c847bba-3b9c-4d6a-b443-ade855bdf877",
             "actions": [
                 {
@@ -552,15 +552,6 @@
                     "name": "Sprint",
                     "type": "Button",
                     "id": "35d95ffb-a442-4a44-b8e4-1cf7282c3971",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ChangeWpn",
-                    "type": "Button",
-                    "id": "1abf3108-1117-426a-b434-bc739023db8d",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -739,17 +730,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b4c47a46-08b2-46db-a7d8-bc5894f36988",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "ChangeWpn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

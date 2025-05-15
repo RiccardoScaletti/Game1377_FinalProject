@@ -30,16 +30,14 @@ public class PlayerControls : MonoBehaviour
         controller = GetComponent<CharacterController>();
         controls = new InputSystem_Actions();
 
-        controls.TowerDefense.Move.performed += OnMove;
-        controls.TowerDefense.Move.canceled += OnMove;
-        controls.TowerDefense.Sprint.performed += OnSprint;
-        controls.TowerDefense.Sprint.canceled += OnSprint;
+        controls.ZombieAttack.Move.performed += OnMove;
+        controls.ZombieAttack.Move.canceled += OnMove;
+        controls.ZombieAttack.Sprint.performed += OnSprint;
+        controls.ZombieAttack.Sprint.canceled += OnSprint;
 
-        controls.TowerDefense.Fire.performed += OnFire;
+        controls.ZombieAttack.Fire.performed += OnFire;
 
-        controls.TowerDefense.ChangeWpn.performed += OnChangeWpn;
-
-        controls.TowerDefense.Reload.performed += OnReload;
+        controls.ZombieAttack.Reload.performed += OnReload;
     }
 
     private void Start()
@@ -48,12 +46,12 @@ public class PlayerControls : MonoBehaviour
     }
     void OnEnable()
     {
-        controls.TowerDefense.Enable();
+        controls.ZombieAttack.Enable();
     }
 
     void OnDisable()
     {
-        controls.TowerDefense.Disable();
+        controls.ZombieAttack.Disable();
     }
 
     void Update()
@@ -65,19 +63,19 @@ public class PlayerControls : MonoBehaviour
         CameraPositionUpdate();
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
         animator.SetBool("IsWalking", isMoving);
-        
+
         controller.Move(move * moveSpeed * Time.deltaTime);
 
         if (!isSprinting)
         {
             RotateTowardsMouse();
         }
-        else 
+        else
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime); //sletp makes it smooth
         }
-        
+
     }
 
     private void OnFire(InputAction.CallbackContext context)
@@ -85,24 +83,29 @@ public class PlayerControls : MonoBehaviour
         float fireRate = Player.instance.currentWeapon.fireRate;
         int bulletsPerShot = Player.instance.currentWeapon.bulletsPerShot;
 
-        if (fireCooldown > 0) return;
-        else if (Player.instance.currentAmmo == 0)
+        if (fireCooldown > 0) return; //not ready to shoot yet
+        else if (Player.instance.currentAmmo == 0)// if no ammo
         {
             Debug.Log("Empty Gun!");
             emptyClip.Play();
+            if (Player.instance.currentWeapon.name != "1911")
+            {
+                Player.instance.audioSources[1].Play();
+                Player.instance.EquipWeapon("1911");
+            }
         }
-        else
+        else //if ammo 
         {
+            Player.instance.audioSources[0].Play();
             StartCoroutine(FireBurst(bulletsPerShot));
             fireCooldown = 1f / fireRate;
         }
     }
-
     private IEnumerator FireBurst(int bulletsPerShot)
     {
         for (int i = 0; i < bulletsPerShot; i++)
         {
-            if (Player.instance.currentAmmo > 0)
+            if(Player.instance.currentAmmo != 0) //this control doesn't seem to work properly
             {
                 Player.instance.audioSources[0].Play();
                 Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
@@ -133,6 +136,26 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    private void OnReload(InputAction.CallbackContext context)
+    {
+        if (Player.instance.currentWeapon.name != "1911") return; //weapons are disposable, don't reload unless 1911.
+
+        //if conditions are met
+        if (!Player.instance.isReloading && Player.instance.currentAmmo != Player.instance.currentWeapon.maxAmmo)
+        {
+            Player.instance.isReloading = true;
+            Player.instance.audioSources[1].Play();
+            StartCoroutine(ReloadTime());
+        }
+
+    }
+    private IEnumerator ReloadTime()
+    {
+        yield return new WaitForSeconds(0.6f);
+        Player.instance.currentAmmo = Player.instance.currentWeapon.maxAmmo;
+        Player.instance.isReloading = false;
+    }
+
     private void RotateTowardsMouse()
     {
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -156,26 +179,5 @@ public class PlayerControls : MonoBehaviour
         mainCamera.transform.position = currentPlayerPos;
     }
 
-    private void OnChangeWpn(InputAction.CallbackContext context)
-    {
-        wpnChanged = true;
-    }
 
-    private void OnReload(InputAction.CallbackContext context)
-    {
-        if (!Player.instance.isReloading && Player.instance.currentAmmo != Player.instance.currentWeapon.maxAmmo)
-        {
-            Player.instance.isReloading = true;
-            Player.instance.audioSources[1].Play();
-            StartCoroutine(ReloadTime());
-        }
-       
-    }
-
-    private IEnumerator ReloadTime()
-    {
-        yield return new WaitForSeconds(Player.instance.currentWeapon.reloadTime);
-        Player.instance.currentAmmo = Player.instance.currentWeapon.maxAmmo;
-        Player.instance.isReloading = false;
-    }
 }

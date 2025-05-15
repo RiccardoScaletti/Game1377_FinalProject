@@ -24,22 +24,25 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null) //common practice when setting up a singleton
+        if (instance != null) 
         {
             Debug.LogWarning("Warning, it is already present another instance of the player");
         }
-        instance = this; // instance initialization, needed to define a singleton
-        //assigns the variable instance to itself
+        instance = this; 
+       
     }
     void Start()
     {
         health = 1;
-        EquipWeapon("1911");
+        //EquipWeapon("1911");
+        EquipWeapon("MP5");
     }
 
     void Update()
     {
         healthBar.fillAmount = health;
+        if (currentAmmo == 0 && currentWeapon.name != "1911") EquipWeapon("1911");
+
         if (killCount == 100 && !bossCalled)
         {
             Debug.Log("Boss spawned");
@@ -48,7 +51,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void EquipWeapon(string weaponName)
+    public void EquipWeapon(string weaponName)
     {
         WeaponData weapon = weaponLibrary.GetWeapon(weaponName);
         currentAmmo = weapon.maxAmmo;
@@ -57,7 +60,6 @@ public class Player : MonoBehaviour
             currentWeapon = weapon;
             Debug.Log("Equipped: " + weapon.wpnName);
             audioSources[0].clip = currentWeapon.wpnSoundShot;
-            audioSources[1].clip = currentWeapon.wpnSoundReload;
         }
         else
         {

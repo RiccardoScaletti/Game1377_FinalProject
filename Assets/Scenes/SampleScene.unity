@@ -213,6 +213,7 @@ Transform:
   - {fileID: 738356918}
   - {fileID: 1380050744}
   - {fileID: 189112268}
+  - {fileID: 680825093}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &68906668
@@ -261,8 +262,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ZombiePrefabs:
   - {fileID: 8319230635973193171, guid: ae0b8b262b9e4d248876c18ba4c62717, type: 3}
-  - {fileID: 8319230635973193171, guid: 91f36960a06e8c84e9d699e6b39a23a5, type: 3}
-  - {fileID: 8319230635973193171, guid: 073020de85437844bb7741289ff6d8c9, type: 3}
+  - {fileID: 8319230635973193171, guid: 5308a36e88b716849b72c562eac940f2, type: 3}
+  - {fileID: 8319230635973193171, guid: 94f4a1fb15cfd5040b867ab2e0de2bb0, type: 3}
 --- !u!1 &74411570 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4421032100962210784, guid: a58820d2929a43b47853fda56c5905da, type: 3}
@@ -571,15 +572,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  killCount: 0
+  healthBar: {fileID: 268766895}
   weaponLibrary: {fileID: 11400000, guid: 0dc026ce8e008504ea3b7f520ef340a2, type: 2}
   currentWeapon: {fileID: 11400000, guid: bb90a553588f50e47a8e998d06c5ae0a, type: 2}
   currentAmmo: 0
   audioSources:
   - {fileID: 95578605}
   - {fileID: 95578604}
-  healthBar: {fileID: 268766895}
   isReloading: 0
+  killCount: 0
 --- !u!4 &95578602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400052, guid: f4209d51d1ad0434299f2d498ee076ba, type: 3}
@@ -595,10 +596,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c300c0bc31e31f549be7e84a578083dd, type: 3}
+  m_Resource: {fileID: 8300000, guid: c300c0bc31e31f549be7e84a578083dd, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.342
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -695,7 +696,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.163
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1029,6 +1030,7 @@ Transform:
   - {fileID: 978607232}
   - {fileID: 1215095616}
   - {fileID: 936837317}
+  - {fileID: 1396482105}
   m_Father: {fileID: 48649363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &190570932
@@ -1728,6 +1730,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a58820d2929a43b47853fda56c5905da, type: 3}
+--- !u!1 &680825092 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8319230635973193171, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+  m_PrefabInstance: {fileID: 1962593638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &680825093 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8662683242904352617, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+  m_PrefabInstance: {fileID: 1962593638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &714201404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2371,8 +2383,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ZombiePrefabs:
   - {fileID: 8319230635973193171, guid: ae0b8b262b9e4d248876c18ba4c62717, type: 3}
-  - {fileID: 8319230635973193171, guid: 91f36960a06e8c84e9d699e6b39a23a5, type: 3}
-  - {fileID: 8319230635973193171, guid: 073020de85437844bb7741289ff6d8c9, type: 3}
+  - {fileID: 8319230635973193171, guid: 5308a36e88b716849b72c562eac940f2, type: 3}
+  - {fileID: 8319230635973193171, guid: 94f4a1fb15cfd5040b867ab2e0de2bb0, type: 3}
 --- !u!1 &938670208 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4421032100962210784, guid: a58820d2929a43b47853fda56c5905da, type: 3}
@@ -2502,8 +2514,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ZombiePrefabs:
   - {fileID: 8319230635973193171, guid: ae0b8b262b9e4d248876c18ba4c62717, type: 3}
-  - {fileID: 8319230635973193171, guid: 91f36960a06e8c84e9d699e6b39a23a5, type: 3}
-  - {fileID: 8319230635973193171, guid: 073020de85437844bb7741289ff6d8c9, type: 3}
+  - {fileID: 8319230635973193171, guid: 5308a36e88b716849b72c562eac940f2, type: 3}
+  - {fileID: 8319230635973193171, guid: 94f4a1fb15cfd5040b867ab2e0de2bb0, type: 3}
 --- !u!1 &1072035510
 GameObject:
   m_ObjectHideFlags: 0
@@ -2807,8 +2819,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ZombiePrefabs:
   - {fileID: 8319230635973193171, guid: ae0b8b262b9e4d248876c18ba4c62717, type: 3}
-  - {fileID: 8319230635973193171, guid: 91f36960a06e8c84e9d699e6b39a23a5, type: 3}
-  - {fileID: 8319230635973193171, guid: 073020de85437844bb7741289ff6d8c9, type: 3}
+  - {fileID: 8319230635973193171, guid: 5308a36e88b716849b72c562eac940f2, type: 3}
+  - {fileID: 8319230635973193171, guid: 94f4a1fb15cfd5040b867ab2e0de2bb0, type: 3}
 --- !u!4 &1219055032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4639735406779035247, guid: a58820d2929a43b47853fda56c5905da, type: 3}
@@ -2898,13 +2910,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232369253}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0.6313726, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 2, y: 2}
+  m_EffectDistance: {x: 5, y: 5}
   m_UseGraphicAlpha: 1
 --- !u!1001 &1281278804
 PrefabInstance:
@@ -3252,6 +3264,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4639735406779035247, guid: a58820d2929a43b47853fda56c5905da, type: 3}
   m_PrefabInstance: {fileID: 926228921}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1396482104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1396482105}
+  m_Layer: 0
+  m_Name: BossSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1396482105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396482104}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 189112268}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1435952887 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4639735406779035247, guid: a58820d2929a43b47853fda56c5905da, type: 3}
@@ -3307,7 +3350,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12, y: 5.600006}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1445224906
@@ -3645,7 +3688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1665046499
 Transform:
   m_ObjectHideFlags: 0
@@ -4184,7 +4227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCharacter: {fileID: 95578593}
-  hordeNumber: 1
+  bossObject: {fileID: 680825092}
+  zombiesSpawned: 0
 --- !u!4 &1907739902
 Transform:
   m_ObjectHideFlags: 0
@@ -4465,6 +4509,68 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1001 &1962593638
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 48649363}
+    m_Modifications:
+    - target: {fileID: 8319230635973193171, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_Name
+      value: ZombieBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8319230635973193171, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662683242904352617, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.605981
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662683242904352617, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662683242904352617, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.664867
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662683242904352617, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662683242904352617, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662683242904352617, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662683242904352617, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662683242904352617, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662683242904352617, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662683242904352617, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3073440001906075543, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
 --- !u!1 &1971527081 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4421032100962210784, guid: a58820d2929a43b47853fda56c5905da, type: 3}

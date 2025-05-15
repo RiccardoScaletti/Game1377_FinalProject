@@ -27,10 +27,8 @@ public class WeaponData : ScriptableObject
     public Rarity rarity;
     public int maxAmmo;
     public int bulletsPerShot;
-    public float reloadTime;
     public Sprite wpnImage;
     public AudioClip wpnSoundShot;
-    public AudioClip wpnSoundReload;
 
     //This depend on the rarity of the gun
     [HideInInspector] public float fireRate;
@@ -52,19 +50,13 @@ public class WeaponData : ScriptableObject
                         dmg = 1;
                         break;
                     case Rarity.uncommon:
-                        fireRate = 1;
-                        bulletSpeed = 60;
-                        dmg = 2;
+                        //TODO
                         break;
                     case Rarity.rare:
-                        fireRate = 2;
-                        bulletSpeed = 70;
-                        dmg = 2;
+                        //TODO
                         break;
                     case Rarity.legendary:
-                        fireRate = 2;
-                        bulletSpeed = 80;
-                        dmg = 3;
+                        //TODO
                         break;
                     default:
                         break;
@@ -74,24 +66,39 @@ public class WeaponData : ScriptableObject
                 switch (rarity) 
                 {
                     case Rarity.common:
-                        fireRate = 2;
-                        bulletSpeed = 70;
-                        dmg = 3;
+                        //TODO
                         break;
                     case Rarity.uncommon:
-                        fireRate = 2;
+                        fireRate = 1.5f;
                         bulletSpeed = 90;
                         dmg = 4;
                         break;
                     case Rarity.rare:
-                        fireRate = 3;
-                        bulletSpeed = 80;
-                        dmg = 5;
+                        //TODO
                         break;
                     case Rarity.legendary:
+                        //TODO
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case WpnType.SMG:
+                switch (rarity) 
+                {
+                    case Rarity.common:
+                       //TODO
+                        break;
+                    case Rarity.uncommon:
                         fireRate = 3;
-                        bulletSpeed = 100;
-                        dmg = 6;
+                        bulletSpeed = 120;
+                        dmg = 2;
+                        break;
+                    case Rarity.rare:
+                        //TODO
+                        break;
+                    case Rarity.legendary:
+                        //TODO
                         break;
                     default:
                         break;
