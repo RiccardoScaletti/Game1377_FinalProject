@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class ZombieBoss : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class ZombieBoss : MonoBehaviour
 
     [SerializeField] private AudioSource attack;
     [SerializeField] private GameObject FireBallPrefab;
+
+    [SerializeField] private GameObject healthBarObject;
+    [SerializeField] private Image healthBar;
+
     private GameObject playerTarget;
     private NavMeshAgent agent;
 
@@ -25,12 +30,13 @@ public class ZombieBoss : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
+        healthBarObject.SetActive(true);
         if (playerTarget == null) playerTarget = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
+        healthBar.fillAmount = healthPoints /100f;
         if (playerTarget == null) return;
         agent.SetDestination(playerTarget.transform.position);
 
