@@ -71,9 +71,9 @@ public class ZombieBoss : MonoBehaviour
         {
             healthPoints -= Player.instance.currentWeapon.dmg;
             if (healthPoints <= 0)
-            {
-                Destroy(gameObject);
+            { 
                 onBossDefeated?.Invoke();
+                Destroy(gameObject);
             }
             Destroy(other.gameObject);
         }

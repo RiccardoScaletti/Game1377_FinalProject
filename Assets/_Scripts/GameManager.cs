@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject bossObject;
     [SerializeField] private GameObject gameOverMenu;
 
+    [SerializeField] private AudioSource WinSound;
+
     public bool gameLost = false;
     public event Action OnHordeStarts;
 
@@ -53,7 +55,10 @@ public class GameManager : MonoBehaviour
     private void GameWon()//3
     {
         Debug.Log("game won");
-        Application.Quit();
+        WinSound.Play();
+        gameLost = true;
+        gameOverMenu.SetActive(true);
+        GameObject.Find("Canvas").SetActive(false);
     }
 
     public void EndGame()//4
