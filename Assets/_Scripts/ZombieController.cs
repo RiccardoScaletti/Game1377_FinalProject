@@ -74,7 +74,7 @@ public class ZombieController : MonoBehaviour
             zombiesound.PlayOneShot(deathSounds[UnityEngine.Random.Range(0,3)]);
             if (!isDead)
             {
-                Destroy(other.gameObject); //destroy bullet
+                Destroy(other.gameObject);
                 Destroy(ZombieMapIndicator);
                 Destroy(GetComponent<BoxCollider>());
                 Destroy(GetComponent<NavMeshAgent>());

@@ -7,7 +7,7 @@ public class SpawnPoint : MonoBehaviour
 {
     [SerializeField] private GameObject[] ZombiePrefabs;
     private float spawnRate = 0.5f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         GameManager.instance.OnHordeStarts += SpawnZombies;

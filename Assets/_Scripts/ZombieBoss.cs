@@ -46,7 +46,6 @@ public class ZombieBoss : MonoBehaviour
         }
        
         fireballCooldown -= Time.deltaTime;
-
         if (fireballCooldown <= 0)
         {
             FireBall();
