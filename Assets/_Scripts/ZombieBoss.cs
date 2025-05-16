@@ -7,12 +7,14 @@ public class ZombieBoss : MonoBehaviour
     public static ZombieBoss instance { get; private set; }
 
     [SerializeField] private AudioSource attack;
+    [SerializeField] private GameObject FireBallPrefab;
     private GameObject playerTarget;
     private NavMeshAgent agent;
 
     private float biteDelay = 0.5f;
-    private float attackCooldown = 0f;
-    private int healthPoints = 20;
+    private float attackCooldown = 0.25f;
+    private float fireballCooldown = 2f;
+    private int healthPoints = 70;
 
     public Action onBossDefeated;
 
@@ -36,6 +38,20 @@ public class ZombieBoss : MonoBehaviour
         {
             attackCooldown -= Time.deltaTime;
         }
+       
+        fireballCooldown -= Time.deltaTime;
+
+        if (fireballCooldown <= 0)
+        {
+            FireBall();
+        }
+    }
+
+    private void FireBall()
+    {
+        Debug.Log("Fireball");
+        Instantiate(FireBallPrefab, transform.position, transform.rotation);
+        fireballCooldown = 2;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,6 +60,7 @@ public class ZombieBoss : MonoBehaviour
         {
             attack.Play();
             Player.instance.health -= 0.25f;
+            attackCooldown = biteDelay;
         }
         else if (other.tag == "Bullet")
         {

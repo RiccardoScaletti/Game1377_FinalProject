@@ -1,6 +1,5 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "NewWeapon", menuName = "Weapons/Weapon")]
 public class WeaponData : ScriptableObject

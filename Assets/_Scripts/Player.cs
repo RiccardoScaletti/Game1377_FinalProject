@@ -13,12 +13,15 @@ public class Player : MonoBehaviour
 
     [Header("Wpn sounds")]
     public AudioSource[] audioSources; //0 is for shooting, 1 is for reload
+    public AudioSource pickUpAudioSource;
 
     [HideInInspector] public bool isReloading = false;
     [HideInInspector] public int killCount = 0;
 
+
     public event Action OnBossBattle;
     private bool bossCalled = false;
+    
 
     public static Player instance { get; private set; }
 
@@ -34,8 +37,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         health = 1;
-        //EquipWeapon("1911");
-        EquipWeapon("MP5");
+        EquipWeapon("1911");
     }
 
     void Update()

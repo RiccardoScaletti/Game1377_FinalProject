@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 229947843944379123}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 11.2, z: 0}
+  m_LocalPosition: {x: 0, y: 7.6, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5d6469f633b61ea408072d2634d796f5, type: 2}
+  - {fileID: 2100000, guid: 15f3be6e399c21045946af0e96729a5e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0112b3ddf6b69f148b600356eb9c21a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.605981
+      value: 3.4439278
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0112b3ddf6b69f148b600356eb9c21a3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -138,7 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0112b3ddf6b69f148b600356eb9c21a3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.664867
+      value: 13.823116
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0112b3ddf6b69f148b600356eb9c21a3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 5235997662346989975}
+  FireBallPrefab: {fileID: 833806733214305991, guid: a17824b54397ab44f91d51bef6e512bb, type: 3}
 --- !u!195 &5130884745848526270
 NavMeshAgent:
   m_ObjectHideFlags: 0

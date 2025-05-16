@@ -10,6 +10,8 @@ public class ZombieController : MonoBehaviour
 
     [SerializeField] private AudioSource zombiesound;
 
+    [SerializeField] private GameObject ZombieMapIndicator;
+
     private Animator animator;
 
     private GameObject playerTarget;
@@ -17,26 +19,41 @@ public class ZombieController : MonoBehaviour
 
     private float biteDelay = 0.5f;
     private float attackCooldown = 0f;
+    private float despawnCooldown = 0f;
+    bool isDead = false;
 
-    private bool isDead = false;
+    private int rndSpawnChance;
+    private DropsSpawnManager dropsMngr;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>(); 
+        dropsMngr = GameObject.Find("Managers").GetComponent<DropsSpawnManager>();
         if (playerTarget == null) playerTarget = GameObject.FindGameObjectWithTag("Player");       
     }
 
     void Update()
     {
-        if (playerTarget == null ) return;
-
-        if (isDead) agent.SetDestination(transform.position);
-        else agent.SetDestination(playerTarget.transform.position);
-
-        if (attackCooldown > 0)
+        if (!isDead)
         {
-            attackCooldown -= Time.deltaTime;
+            if (playerTarget == null) return;
+
+            else agent.SetDestination(playerTarget.transform.position);
+
+            if (attackCooldown > 0)
+            {
+                attackCooldown -= Time.deltaTime;
+            }
+
+        }
+        else
+        {
+            despawnCooldown += Time.deltaTime;
+            if (despawnCooldown >= 5)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -52,14 +69,25 @@ public class ZombieController : MonoBehaviour
         else if (other.tag == "Bullet")
         {
             Player.instance.killCount++;
-            isDead = true;
             animator.SetBool("IsDead", true);
 
-            Destroy(GetComponent<BoxCollider>());
-
             zombiesound.PlayOneShot(deathSounds[UnityEngine.Random.Range(0,3)]);
+            if (!isDead)
+            {
+                Destroy(other.gameObject); //destroy bullet
+                Destroy(ZombieMapIndicator);
+                Destroy(GetComponent<BoxCollider>());
+                Destroy(GetComponent<NavMeshAgent>());
+            }
+            isDead = true;
 
-            Destroy(other.gameObject); //destroy bullet   
+            //Drop
+            rndSpawnChance = UnityEngine.Random.Range(0, 100);
+            if (rndSpawnChance > 90)
+            {
+                rndSpawnChance = UnityEngine.Random.Range(0, 2);
+                dropsMngr.SpawnUsableObject(rndSpawnChance, transform.position, transform.rotation);
+            }
         }
     }
 
