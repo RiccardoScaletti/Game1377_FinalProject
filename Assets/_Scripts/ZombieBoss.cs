@@ -65,7 +65,7 @@ public class ZombieBoss : MonoBehaviour
         if (other.tag == "Player")
         {
             attack.Play();
-            Player.instance.health -= 0.25f;
+            Player.instance.PlayerWound(0.25f);           
             attackCooldown = biteDelay;
         }
         else if (other.tag == "Bullet")
@@ -85,7 +85,7 @@ public class ZombieBoss : MonoBehaviour
         if (other.CompareTag("Player") && attackCooldown <= 0f)
         {
             attack.Play();
-            Player.instance.health -= 0.1f;
+            Player.instance.PlayerWound(0.1f);
             attackCooldown = biteDelay;
         }
     }

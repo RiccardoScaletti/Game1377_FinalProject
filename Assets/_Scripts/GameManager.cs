@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     //store gameobjects for the player and rival to target scripts that plays animations
     [SerializeField] private GameObject playerCharacter;
     [SerializeField] private GameObject bossObject;
+    [SerializeField] private GameObject gameOverMenu;
 
+    public bool gameLost = false;
     public event Action OnHordeStarts;
 
     public int zombiesSpawned = 0;
@@ -34,16 +36,10 @@ public class GameManager : MonoBehaviour
         
         ZombieBoss zombieBossScript = bossObject.GetComponent<ZombieBoss>();//3
         zombieBossScript.onBossDefeated += GameWon;
-    }
 
-    private void Update()
-    {
-        if (Player.instance.health <= 0)
-        {
-            EndGame();
-        }
+       Player.instance.OnGameOver += EndGame;//4
+
     }
-   
     private void StartHorde()//1
     {
         OnHordeStarts?.Invoke();
@@ -60,9 +56,11 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    private void EndGame()
+    public void EndGame()//4
     {
         Debug.Log("game lost");
-        Application.Quit();
+        gameLost = true;
+        gameOverMenu.SetActive(true);
+        GameObject.Find("Canvas").SetActive(false);
     }
 }

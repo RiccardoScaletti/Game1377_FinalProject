@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 
 
     public event Action OnBossBattle;
+    public event Action OnGameOver;
+
     private bool bossCalled = false;
     
 
@@ -66,6 +68,16 @@ public class Player : MonoBehaviour
         else
         {
             Debug.LogWarning("Weapon not found in the lib");
+        }
+    }
+
+    public void PlayerWound(float dmg)
+    {
+        Player.instance.health -= dmg;
+        if (health <= 0)
+        {
+            Debug.Log("HERE");
+            OnGameOver?.Invoke();
         }
     }
 }

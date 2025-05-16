@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -29,5 +30,15 @@ public class UIManager : MonoBehaviour
     {
         currentWeaponImg.sprite = Player.instance.currentWeapon.wpnImage;
         ammoCountText.text = Player.instance.currentAmmo.ToString() + "/" + Player.instance.currentWeapon.maxAmmo;
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

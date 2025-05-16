@@ -11,6 +11,6 @@ public class FireBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player") Player.instance.health -= 0.2f;
+        if (other.gameObject.tag == "Player") Player.instance.PlayerWound(0.2f);
     }
 }

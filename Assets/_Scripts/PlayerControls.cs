@@ -76,6 +76,8 @@ public class PlayerControls : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime); //sletp makes it smooth
         }
 
+        if (GameManager.instance.gameLost) gameObject.SetActive(false);
+
     }
 
     private void OnFire(InputAction.CallbackContext context)

@@ -64,7 +64,7 @@ public class ZombieController : MonoBehaviour
             zombiesound.PlayOneShot(attackSound);
 
             animator.SetBool("IsAttacking", true);
-            Player.instance.health -= 0.1f;
+            Player.instance.PlayerWound(0.1f);
         }
         else if (other.tag == "Bullet")
         {
@@ -98,7 +98,7 @@ public class ZombieController : MonoBehaviour
             zombiesound.PlayOneShot(attackSound);
 
             animator.SetBool("IsAttacking", true);
-            Player.instance.health -= 0.1f;
+            Player.instance.PlayerWound(0.1f);
             attackCooldown = biteDelay; 
         }
     }
