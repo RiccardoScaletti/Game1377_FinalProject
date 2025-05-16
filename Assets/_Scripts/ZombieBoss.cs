@@ -14,7 +14,7 @@ public class ZombieBoss : MonoBehaviour
     private float biteDelay = 0.5f;
     private float attackCooldown = 0.25f;
     private float fireballCooldown = 2f;
-    private int healthPoints = 70;
+    private int healthPoints = 100;
 
     public Action onBossDefeated;
 
