@@ -5,9 +5,6 @@ public class SpawnableData : MonoBehaviour
     [SerializeField]private WeaponData weapon;
     private float despawnTimer = 0;
 
-    private void Start()
-    {
-    }
     private void Update()
     {
         transform.Rotate(0f, 0f, 70 * Time.deltaTime);

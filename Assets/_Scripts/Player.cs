@@ -76,7 +76,6 @@ public class Player : MonoBehaviour
         Player.instance.health -= dmg;
         if (health <= 0)
         {
-            Debug.Log("HERE");
             OnGameOver?.Invoke();
         }
     }

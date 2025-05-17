@@ -10,7 +10,7 @@ public class WeaponData : ScriptableObject
         Pistol,
         SMG,
         Assault,
-        Shotgun
+        Sniper
     }
     public enum Rarity
     {
@@ -33,6 +33,7 @@ public class WeaponData : ScriptableObject
     [HideInInspector] public float fireRate;
     [HideInInspector] public int bulletSpeed;
     [HideInInspector] public int dmg;
+    [HideInInspector] public int pierced = 0;
 
     public void InitializeWeaponStats()
     {
@@ -92,6 +93,27 @@ public class WeaponData : ScriptableObject
                         fireRate = 3;
                         bulletSpeed = 120;
                         dmg = 2;
+                        break;
+                    case Rarity.rare:
+                        //TODO
+                        break;
+                    case Rarity.legendary:
+                        //TODO
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case WpnType.Sniper:
+                switch (rarity)
+                {
+                    case Rarity.common:
+                        //TODO
+                        break;
+                    case Rarity.uncommon:
+                        fireRate = 0.5f;
+                        bulletSpeed = 200;
+                        dmg = 15;
                         break;
                     case Rarity.rare:
                         //TODO

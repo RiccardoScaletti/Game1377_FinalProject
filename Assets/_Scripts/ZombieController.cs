@@ -74,7 +74,16 @@ public class ZombieController : MonoBehaviour
             zombiesound.PlayOneShot(deathSounds[UnityEngine.Random.Range(0,3)]);
             if (!isDead)
             {
-                Destroy(other.gameObject);
+                if (Player.instance.currentWeapon.pierced == 0 && Player.instance.currentWeapon.type == WeaponData.WpnType.Sniper)
+                {
+                    Player.instance.currentWeapon.pierced++;
+                }
+                else
+                {
+                    Destroy(other.gameObject);
+                    Player.instance.currentWeapon.pierced--;
+                }
+                
                 Destroy(ZombieMapIndicator);
                 Destroy(GetComponent<BoxCollider>());
                 Destroy(GetComponent<NavMeshAgent>());
@@ -85,7 +94,7 @@ public class ZombieController : MonoBehaviour
             rndSpawnChance = UnityEngine.Random.Range(0, 100);
             if (rndSpawnChance > 90)
             {
-                rndSpawnChance = UnityEngine.Random.Range(0, 2);
+                rndSpawnChance = UnityEngine.Random.Range(0, WeaponLibrary.weaponCount - 1);
                 dropsMngr.SpawnUsableObject(rndSpawnChance, transform.position, transform.rotation);
             }
         }

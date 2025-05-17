@@ -10,15 +10,19 @@ public class WeaponLibrary : ScriptableObject
 
     private Dictionary<string, WeaponData> weaponDict;
 
+    public static int weaponCount;
+
     public void Initialize()
     {
+        Debug.Log("Initialize");
         weaponDict = new Dictionary<string, WeaponData>();
         foreach (var weapon in weapons)
         {
-            if (!weaponDict.ContainsKey(weapon.wpnName))
-                weapon.InitializeWeaponStats();
+            if (!weaponDict.ContainsKey(weapon.wpnName)) weapon.InitializeWeaponStats();
                 weaponDict.Add(weapon.wpnName, weapon);
+                weaponCount++;
         }
+
     }
 
     public WeaponData GetWeapon(string name)

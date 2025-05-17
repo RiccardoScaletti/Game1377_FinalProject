@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64275ab31854b2040ac6919c60cef9ba, type: 3}
+  m_Name: SR
+  m_EditorClassIdentifier: 
+  wpnName: SR
+  type: 4
+  rarity: 1
+  maxAmmo: 5
+  bulletsPerShot: 1
+  wpnImage: {fileID: 1020627669, guid: 2af61068aef15e241927b3cc5a2e58ea, type: 3}
+  wpnSoundShot: {fileID: 8300000, guid: 1a15abdcb4ca8bb43a574ff97905f8c8, type: 3}
+  fireRate: 0.5
+  bulletSpeed: 300
+  dmg: 15
+  pierced: 0

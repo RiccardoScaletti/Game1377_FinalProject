@@ -107,13 +107,11 @@ public class PlayerControls : MonoBehaviour
     {
         for (int i = 0; i < bulletsPerShot; i++)
         {
-            if(Player.instance.currentAmmo != 0) //this control doesn't seem to work properly
-            {
-                Player.instance.audioSources[0].Play();
-                Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-                Player.instance.currentAmmo--;
-                yield return new WaitForSeconds(burstDelay);
-            }
+
+            Player.instance.audioSources[0].Play();
+            Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+            Player.instance.currentAmmo--;
+            yield return new WaitForSeconds(burstDelay);
         }
     }
 
