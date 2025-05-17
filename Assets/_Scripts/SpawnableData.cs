@@ -9,7 +9,7 @@ public class SpawnableData : MonoBehaviour
     {
         transform.Rotate(0f, 0f, 70 * Time.deltaTime);
         despawnTimer += Time.deltaTime;
-        if (despawnTimer >= 20) Destroy(gameObject);
+        if (despawnTimer >= 30) Destroy(gameObject);
     }
     private void OnTriggerEnter(Collider other)
     {

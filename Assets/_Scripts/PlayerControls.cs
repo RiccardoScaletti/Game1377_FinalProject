@@ -76,7 +76,7 @@ public class PlayerControls : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime); //sletp makes it smooth
         }
 
-        if (GameManager.instance.gameLost) gameObject.SetActive(false);
+        if (GameManager.instance.gameOver) gameObject.SetActive(false);
 
     }
 
@@ -98,16 +98,15 @@ public class PlayerControls : MonoBehaviour
         }
         else //if ammo 
         {
-            Player.instance.audioSources[0].Play();
             StartCoroutine(FireBurst(bulletsPerShot));
             fireCooldown = 1f / fireRate;
         }
     }
     private IEnumerator FireBurst(int bulletsPerShot)
     {
+        Player.instance.audioSources[0].Play();
         for (int i = 0; i < bulletsPerShot; i++)
         {
-
             Player.instance.audioSources[0].Play();
             Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
             Player.instance.currentAmmo--;

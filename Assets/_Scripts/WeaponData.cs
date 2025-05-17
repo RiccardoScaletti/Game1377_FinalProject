@@ -33,7 +33,7 @@ public class WeaponData : ScriptableObject
     [HideInInspector] public float fireRate;
     [HideInInspector] public int bulletSpeed;
     [HideInInspector] public int dmg;
-    [HideInInspector] public int pierced = 0;
+    [HideInInspector] public bool piercing = false;
 
     public void InitializeWeaponStats()
     {
@@ -114,6 +114,7 @@ public class WeaponData : ScriptableObject
                         fireRate = 0.5f;
                         bulletSpeed = 200;
                         dmg = 15;
+                        piercing = true;
                         break;
                     case Rarity.rare:
                         //TODO

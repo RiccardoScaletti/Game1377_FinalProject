@@ -1754,7 +1754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5130884745848526270, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
       propertyPath: m_AngularSpeed
-      value: 600
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 8319230635973193171, guid: 7128e06c9189bab44b3c6e91370345d1, type: 3}
       propertyPath: m_Name
@@ -2446,7 +2446,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3857f85ea7b75a14d88b5f163a83801c, type: 3}
   m_Resource: {fileID: 8300000, guid: 3857f85ea7b75a14d88b5f163a83801c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -6728,7 +6728,7 @@ MonoBehaviour:
   bossObject: {fileID: 2031760354}
   gameOverMenu: {fileID: 60795767}
   WinSound: {fileID: 415340329}
-  gameLost: 0
+  gameOver: 0
   zombiesSpawned: 0
 --- !u!4 &1907739902
 Transform:
@@ -6761,6 +6761,7 @@ MonoBehaviour:
   spawnables:
   - {fileID: 4872182472486176287, guid: 1f6ff75c43780f54995ce7c1e8b823ab, type: 3}
   - {fileID: 2538970678171057453, guid: 1fb12fecb2b071a4da2f1a7e46ddfbd4, type: 3}
+  - {fileID: 2481292344728841798, guid: ea251f9eed17ef343beb935c2fe220dd, type: 3}
 --- !u!1 &1913328638
 GameObject:
   m_ObjectHideFlags: 0

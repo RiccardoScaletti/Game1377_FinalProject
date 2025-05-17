@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AudioSource WinSound;
 
-    public bool gameLost = false;
+    public bool gameOver = false;
     public event Action OnHordeStarts;
 
     public int zombiesSpawned = 0;
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("game won");
         WinSound.Play();
-        gameLost = true;
+        gameOver = true;
         gameOverMenu.SetActive(true);
         GameObject.Find("Canvas").SetActive(false);
     }
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public void EndGame()//4
     {
         Debug.Log("game lost");
-        gameLost = true;
+        gameOver = true;
         gameOverMenu.SetActive(true);
         GameObject.Find("Canvas").SetActive(false);
     }
