@@ -15,7 +15,7 @@ public class PlayerControls : MonoBehaviour
 
     private Vector3 moveInput;
     private CharacterController controller;
-    private InputSystem_Actions controls;
+    private PlayerInputs controls;
 
     public static bool wpnChanged = false;
 
@@ -28,7 +28,7 @@ public class PlayerControls : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<CharacterController>();
-        controls = new InputSystem_Actions();
+        controls = new PlayerInputs();
 
         controls.ZombieAttack.Move.performed += OnMove;
         controls.ZombieAttack.Move.canceled += OnMove;
